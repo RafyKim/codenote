@@ -1,0 +1,463 @@
+{% block css %}
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/zb.css"/>
+{% endblock css %}
+
+{% block js %}
+    <script src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+{% endblock js %}
+
+
+{% block body %}
+
+
+    {# 로그인 모달 iframe #}
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+
+        <div class="modal-body">
+            <iframe class="login_iframe" src="/account/signup/" frameBorder="0"></iframe>
+        </div>
+
+        {# iframe src안의 콘텐트 높이에 따라 iframe heoght가 맞춰짐 #}
+        <script>
+            $(function() {
+                $('iframe.login_iframe').load(function() {
+                    $(this).css("height", $(this).contents().find(".login_box").height() + "px");
+                });
+            });
+        </script>
+
+        {#   로그인 회원가입하다가 모달이 꺼지면 input값이 지워지도록... iframe 이라서 그런가? 안된다ㅜㅜ #}
+        <script>
+            $(document).ready(function(){
+                $("body.modal-open").click(function(){
+                    $("#id_login").val(""); //Clear the text input
+                    $("#id_password").val("");
+                    $("#id_email").val("");
+                    $("#id_password1").val("");
+                    $("#id_password2").val("");
+                });
+            });
+        </script>
+
+    </div>
+
+    {# menu #}
+    <div class="menu-wrap">
+
+    <nav class="menu">
+            <ul class="menu-list">
+                <li class="menu_home" href="#"><a href="/menu/"><img src="/static/img/notification.png"/>홈</a></li>
+
+                <li class="menu_home" href="#"><a href="/index/"><img src="/static/img/notification.png"/>내 책장</a> </li>
+
+                <li><a href="#">내가 본 작품 &nbsp;&nbsp;&nbsp;&nbsp;<span>111</span></a></li>
+                <li><a href="#">내 작품 신간&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">N</span></a></li>
+                <li><a href="#">구매 / 대여&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>15</span></a></li>
+                <li><a href="#">보고싶다&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>57</span></a></li>
+                <li><a href="#">내 코멘트&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>30</span></a></li>
+
+                <li class="menu_home" href="#"><a href="/index"><img src="/static/img/notification.png"/>새 작품 찾기</a> </li>
+
+                <li><a href="#">날 위한 추천작</a></li>
+                <li><a href="#">라프텔 신간</a></li>
+                <li><a href="#">인기 Top 100</a></li>
+                <li><a href="#">작품 전체</a></li>
+
+                <li class="menu_home" href="#"><a href="/index/"><img src="/static/img/notification.png"/>내 친구들</a> </li>
+
+                <li><a href="#">친구들 활동</a></li>
+                <li><a href="#">친구들 책장</a></li>
+
+
+
+            </ul>
+
+{#            신규방문자는 최근소식을 열어볼수없으니 login정보가 없으면 열리지 않도록 수정 #}
+{#            기존 가입자여도 최근소식이 없으면 한줄정도만 올라오도록해서 '소식이 없습니다'정도의 '소식'은 알려줄수있도록 수정#}
+
+            <div class="recent" data-toggle="modal" data-target="#loginModal">
+
+                <div id="recent_title" class="recent_title">
+
+                    <span>최근 소식</span>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <span class="badge">5</span>
+                    <span id="recent_arrow" class="glyphicon glyphicon-chevron-up"></span>
+                </div>
+
+
+                <ul class="recent_li">
+
+                    <li>000님이 <br>000을 000했습니다.</li>
+                    <li>000님이 <br>000에 00 00개를 00했습니다.</li>
+                    <li>000님이 <br>000에 000을 남겼습니다.</li>
+                    <li>누군가가 <br>무엇을 어찌함</li>
+                    <li>누군가가 <br>무엇을 어찌함</li>
+                </ul>
+            </div>
+            <div class="close_recent">close</div>
+
+            <a class="login" href="" data-toggle="modal" data-target="#loginModal">로그인</a>
+
+
+            <a class="setting" href="" data-toggle="modal" data-target="#loginModal"> 설정</a>
+
+            <script>
+                $(document).ready(function(){
+
+
+                    $(".recent_title").click(function(){
+                        if ($("#recent_title").hasClass("recent_title")){
+
+                        $(".recent").animate({height:'100%',bottom:'0'},100);
+                        $(".close_recent").css('z-index','2000');
+                        $(this).removeClass("recent_title").addClass("close_down")
+                        $("#recent_arrow").css('transform','rotate(180deg)');
+                        $(".recent_li").css('color','white');
+
+                        }
+                        else{
+                            $(".close_recent").click();
+                            $(this).removeClass("close_down").addClass("recent_title");
+
+                        }
+                    });
+                    $(".close_recent").click(function(){
+                        $(this).css('z-index','-100');
+                        $("#recent_title").removeClass("close_down").addClass("recent_title");
+                        $("#recent_arrow").css('transform','rotate(0deg)');
+                        $(".recent").animate({height:'100px'},100);
+                        $(".recent_li").css('color','#606060');
+                    });
+                });
+
+            </script>
+        </nav>
+    <button class="close-button" id="close-button">Close Menu</button>
+    </div>
+
+    {# nav 헤더 #}
+    <nav class="navi">
+
+
+    <button class="menu-button" id="open-button">Open Menu</button>
+
+
+        <div class="center_logo">
+            <a class="logo" style="display: none" href="#"></a>
+        </div>
+
+
+    <form class="navbar-form navbar-right" id="search_form"  role="search" type="GET" action="/search/" >
+        <div class="form-group">
+            <input type="text" name="query" class="form-control" id="searchbox" autocomplete="off">
+            <span id="searchbox_icon"></span>
+        </div>
+{#            <button type="submit" class="btn btn-default" id="search_bt">#}
+{#                <span class="glyphicon glyphicon-search"></span>#}
+{#            </button>#}
+    </form>
+{#            <input type="text" name="query" class="form-control" id="searchbox">#}
+{#        <div class="form-group">#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{#    <div class="form-control">#}
+{#    <input type="text" id="inputField" />#}
+{#</div>#}
+{#<span id="iconSpan"><img src="/static/img/me.png" onclick="clearInputField()"/></span>#}
+{##}
+{#<script>#}
+{#    $(document).ready(function(){#}
+{#        $("#clear").click(function(){#}
+{#           $("#q").val(""); //Clear the text input#}
+{#        });#}
+{#    });#}
+{#</script>#}
+{#<form id="search" action="/search" style=" display: inline;">#}
+{#    <p>#}
+{#        <div id="searchContainer">#}
+{#          <input type="text" name="q" id="q" style="border: none;" />#}
+{#          <span id="clear">x</span> <!-- You can use an image here instead -->#}
+{#        </div>#}
+{#    </p>#}
+{#</form>#}
+
+</nav>
+
+    {# 서치박스 입력값 지우기 js #}
+    <script>
+        $('input[type="text"]').focus( function(){
+            $(this).attr("data-placeholder",$(this).attr('placeholder')).removeAttr("placeholder");
+        });
+        $('input[type="text"]').blur( function(){
+            $(this).attr("placeholder",$(this).attr('data-placeholder'));
+        });
+    </script>
+
+    {#네비헤더 변신#}
+    <script>
+        var top = $('.navi').offset().top;
+        $(window).scroll(function (event) {
+            var y = $(this).scrollTop();
+            if (y >= 60) {  $('.navi').addClass('shadow').removeChild('.navi').removeClass('.logo'); }
+            else { $('.shadow').addClass('.navi').removeClass('shadow').addClass('.logo'); }
+        });
+    </script>
+
+    {# content-wrap을 클릭할때 menu가 닫히도록 설정됨. #}
+    <div class="content-wrap">
+
+                <div class="index_header">
+                    <img class="next_bg" src="/static/img/index_short_again_02.png" alt=""/>
+
+                    <button type="button" id="start" class="btn btn-default btn-lg" data-toggle="modal" data-target="#loginModal">시  작</button>
+
+                    {#  index 에서 평가 15미만 사용자로그인/ 신규가입자 회원가입 성공시에 -- index에서 이어지는 jquery작동을 어찌해야하는가.... #}
+                    {#  .startani 라는 놈을 하나 만들어놓고 로그인이 성공하면 '클릭'한것처럼. 'load' #}
+                    <script>
+                        $(document).ready(function(){
+                            $(".startani").click(function(){
+                                {# event.stopPropagation();#}
+                                $(".index_header").animate({margin:'0 45%',opacity:'0',height:'0'},1000);
+                                {# $(".next_bg").animate({height:'-100%',opacity:'1',margin:'0'},1000).fadeOut(2000);#}
+                                $("#start").animate({opacity:'0'},500).remove();
+                                $(".dock_header").animate({margin:'0', opacity:'0.7',height:'+=100px',width:'100%'},1000).animate({opacity:'1'},300);
+                                $(".logo").delay(1000).fadeIn(2000);
+                                $('html, body').animate({scrollTop : 0},500);
+                                {#event.preventDefault().stopPropagation();#}
+                            });
+                        });
+                    </script>
+
+                </div>
+
+                <div class="dock_header"></div>
+
+                <div class="startani" style="display: none"></div>
+
+                <div class="content">
+
+                    <div class="index_filter_bar">
+
+                        <div class="genre">
+                            <div class="genre_on">
+
+                            </div>
+                            <div class="genre_option">
+                                장르
+                            </div>
+                        </div>
+
+                        <div class="publishing">
+                            <div class="publishing_on">
+
+                            </div>
+                            <div class="publishing_option">
+                                출판여부
+                            </div>
+                        </div>
+
+                        <div class="completion">
+                            <div class="completion_on">
+
+                            </div>
+                            <div class="completion_option">
+                                완결여부
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    {% include 'item_card.html' %}
+                    {% include 'item_card.html' %}
+                    {% include 'item_card.html' %}
+                    {% include 'item_card.html' %}
+                    {% include 'item_card.html' %}
+                    {% include 'item_card.html' %}
+
+
+                </div>
+
+			</div>
+
+
+    {# menu 닫기 js : 아래 두가지 script 있어야함 #}
+    <script>
+            /*!
+             * classie - class helper functions
+             * from bonzo https://github.com/ded/bonzo
+             *
+             * classie.has( elem, 'my-class' ) -> true/false
+             * classie.add( elem, 'my-new-class' )
+             * classie.remove( elem, 'my-unwanted-class' )
+             * classie.toggle( elem, 'my-class' )
+             */
+
+            /*jshint browser: true, strict: true, undef: true */
+            /*global define: false */
+
+        ( function( window ) {
+
+            'use strict';
+
+            // class helper functions from bonzo https://github.com/ded/bonzo
+
+            function classReg( className ) {
+                return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+            }
+
+            // classList support for class management
+            // altho to be fair, the api sucks because it won't accept multiple classes at once
+            var hasClass, addClass, removeClass;
+
+            if ( 'classList' in document.documentElement ) {
+                hasClass = function( elem, c ) {
+                    return elem.classList.contains( c );
+                };
+                addClass = function( elem, c ) {
+                    elem.classList.add( c );
+                };
+                removeClass = function( elem, c ) {
+                    elem.classList.remove( c );
+                };
+            }
+            else {
+                hasClass = function( elem, c ) {
+                    return classReg( c ).test( elem.className );
+                };
+                addClass = function( elem, c ) {
+                    if ( !hasClass( elem, c ) ) {
+                        elem.className = elem.className + ' ' + c;
+                    }
+                };
+                removeClass = function( elem, c ) {
+                    elem.className = elem.className.replace( classReg( c ), ' ' );
+                };
+            }
+
+            function toggleClass( elem, c ) {
+                var fn = hasClass( elem, c ) ? removeClass : addClass;
+                fn( elem, c );
+            }
+
+            var classie = {
+                // full names
+                hasClass: hasClass,
+                addClass: addClass,
+                removeClass: removeClass,
+                toggleClass: toggleClass,
+                // short names
+                has: hasClass,
+                add: addClass,
+                remove: removeClass,
+                toggle: toggleClass
+            };
+
+            // transport
+            if ( typeof define === 'function' && define.amd ) {
+                // AMD
+                define( classie );
+            } else {
+                // browser global
+                window.classie = classie;
+            }
+
+        })( window );
+    </script>
+
+    <script>
+            /**
+            * main.js
+            * http://www.codrops.com
+            *
+            * Licensed under the MIT license.
+            * http://www.opensource.org/licenses/mit-license.php
+            *
+            * Copyright 2014, Codrops
+            * http://www.codrops.com
+             */
+        (function() {
+
+        var bodyEl = document.body,
+                content = document.querySelector( '.content-wrap' ),
+                navi = document.querySelector('.navi'),
+                openbtn = document.getElementById( 'open-button' ),
+                closebtn = document.getElementById( 'close-button' ),
+                isOpen = false;
+
+        function init() {
+            initEvents();
+        }
+
+        function initEvents() {
+            openbtn.addEventListener( 'click', toggleMenu );
+            if( closebtn ) {
+                closebtn.addEventListener( 'click', function(){
+                    toggleMenu();
+                    if ($("#recent_title").hasClass("recent_title")){
+                        $(".close_recent").stop();
+                    }
+                    else{
+                        $(".close_recent").click();
+                    }
+
+                });
+            }
+
+
+            // close the menu element if the target it´s not the menu element or one of its descendants..
+            content.addEventListener( 'click', function(ev) {
+                var target = ev.target;
+                if( isOpen && target !== openbtn ) {
+                    toggleMenu();
+                    if ($("#recent_title").hasClass("recent_title")){
+                        $(".close_recent").stop();
+                    }
+                    else{
+                        $(".close_recent").click();
+                    }
+                }
+            } );
+
+            navi.addEventListener( 'click', function(ev) {
+                var target = ev.target;
+                if( isOpen && target !== openbtn ) {
+                    toggleMenu();
+                    if ($("#recent_title").hasClass("recent_title")){
+                        $(".close_recent").stop();
+                    }
+                    else{
+                        $(".close_recent").click();
+                    }
+                }
+            } );
+
+        }
+
+        function toggleMenu() {
+            if( isOpen ) {
+                classie.remove( bodyEl, 'show-menu' );
+            }
+            else {
+                classie.add( bodyEl, 'show-menu' );
+            }
+            isOpen = !isOpen;
+        }
+
+        init();
+
+        })();
+    </script>
+
+    {# 오른쪽 아래에있는 top으로 가기 #}
+    <div id="scroll_to_top" style="display: block;">
+        <img src="/static/img/notification.png" onclick="$('html, body').animate({scrollTop:0}, 'fast');"/>
+    </div>
+
+
+{% endblock body %}

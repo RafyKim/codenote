@@ -1,0 +1,9 @@
+# Pycharm
+.idea
+
+# Mac OS
+.DS_Store
+
+# Default
+*.pyc
+codenote/settings.py

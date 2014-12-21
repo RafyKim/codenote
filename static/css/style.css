@@ -1,0 +1,351 @@
+body {
+    background-color: white;
+    font-family: NotoSansKR-Regular;
+
+}
+
+#wrap {
+    /*margin-top: 90px;*/
+}
+
+#subject, #content {
+    max-width: 1020px;
+    margin: 100px auto 0px auto;
+}
+
+#note-button {
+    float: right;
+}
+
+
+.content {
+    position: relative;
+    width: 1020px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: rgb(248,248,248);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+
+/* Add */
+
+#note_name {
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    margin: 20px auto;
+
+}
+
+.cke_contents { height: 400px !important; }
+
+#topic_label {
+    /*text-align: left;*/
+    font-size: 20px;
+    width: 70px;
+    height: 40px;
+    margin: 25px auto;
+    float: left;
+}
+
+#topic {
+    width: 700px;
+    height: 40px;
+    margin: 23px auto;
+    float: left;
+}
+
+#bt_add_note {
+    width: 200px;
+    /*height: 30px;*/
+    margin: 20px auto;
+    float: right;
+}
+
+
+/* Read */
+
+#title {
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    margin: 20px auto;
+    font-size: 25px;
+}
+#read_note_name {
+    float: left;
+    max-width: 750px;
+}
+#read_note_day {
+    max-width: 150px;
+    float: left;
+    font-size: 15px;
+    /*vertical-align: bottom;*/
+    padding: 8px 20px;
+    color: gray;
+}
+
+
+#read_note_content {
+    padding: 30px 10px;
+    clear: both;
+}
+
+#read_topic_list {
+    width: 900px;
+    height: 40px;
+    margin: 23px auto;
+    float: left;
+}
+
+#read_topic_list .topic {
+    float: left;
+    margin: 10px;
+}
+
+#read_note_collection {
+    text-align: right;
+}
+
+#bt_collect {
+    width: 160px;
+}
+
+.cmt_box {
+    clear: both;
+}
+
+.cmt_left {
+    float: left;
+    margin: 20px 70px 20px 50px;
+}
+.cmt_left p {
+    text-align: center;
+}
+.cmt_img {
+    border-radius: 60px;
+    width: 60px;
+    height: 60px;
+}
+
+.cmt_right {
+    float: left;
+}
+.cmt_tip {
+
+}
+
+.cmt_content {
+    width: 670px;
+    height: 104px;
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+.bt_cmt {
+    float: right;
+    margin: 30px 0px 30px 50px;
+}
+
+
+.navi{
+    width: 100%;
+    height: 50px;
+    background-color: #ffffff;
+    position: fixed;
+    top:0;
+    z-index: 1001;
+    /*-webkit-box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);*/
+    /*-moz-box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);*/
+    /*box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);*/
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    -webkit-transition: .5s ease;
+    -moz-transition: .5s ease;
+    -ms-transition: .5s ease;
+    -o-transition: .5s ease;
+    transition: .5s ease;
+    transition-property:all;
+
+}
+.logo{
+    background: url('/static/img/codenote.png');
+    background-size: 200px 35px;
+    width: 200px;
+    height: 35px;
+    z-index: 1002;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    margin-left: -100px;
+
+}
+
+
+#bt_edit {
+    background: url('/static/img/edit.png');
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    /*position: relative;*/
+    /*right: 30px;*/
+    float: right;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#bt_del {
+    background: url('/static/img/close.png');
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    /*position: relative;*/
+    /*right: 30px;*/
+    float: right;
+    cursor: pointer;
+}
+
+#note_name {
+
+}
+
+#note_content {
+
+}
+
+
+/* Usernote */
+.note_summary {
+    padding-bottom: 55px;
+    margin: 50px auto;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+
+.note_summary .title {
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    margin: 20px auto;
+    font-size: 25px;
+    clear: both;
+}
+.note_summary .note_name {
+    float: left;
+}
+.note_summary .note_day {
+    float: left;
+    font-size: 15px;
+    /*vertical-align: bottom;*/
+    padding: 8px 20px;
+    color: gray;
+}
+
+
+.note_user {
+    float: right;
+    /*margin: 20px 70px 20px 50px;*/
+}
+.note_user p {
+    float: left;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px 5px 0px 0px;
+}
+.note_img {
+    float: left;
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+
+.note_summary .note_content {
+    padding: 10px 10px;
+    width: 100%;
+}
+
+.note_summary .topic_list {
+    width: 900px;
+    height: 40px;
+    float: left;
+}
+
+.topic {
+    float: left;
+    margin: 10px;
+    padding: .2em 18px .2em .5em;
+
+}
+
+.bt_edit_cmt {
+    background: url('/static/img/edit.png');
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+    /*position: relative;*/
+    /*right: 30px;*/
+    float: left;
+    margin: 40px 10px 10px 60px;
+    cursor: pointer;
+}
+
+.bt_del_cmt {
+    background: url('/static/img/close.png');
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+    /*position: relative;*/
+    /*right: 30px;*/
+    float: left;
+    margin: 10px 10px 10px -30px;
+    cursor: pointer;
+}
+
+/* Search */
+h3 span {
+    color: #0ea2ff;
+}
+
+/* Index */
+.slogan {
+    padding-top: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.index_content {
+    width: 1020px;
+    height: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.block {
+    float: left;
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+.index_content button{
+    margin-top: 20px;
+    width: 160px;
+}
+
+.cke_button__codesnippet {
+    background: #ffb013 !important;
+}
+
+.cke_button__codesnippet:hover {
+    background: #ff770e !important;
+}
+
+.note_info {
+    float: right;
+}
+.note_info span {
+    margin: 10px;
+}
+

@@ -1,0 +1,118 @@
+/*
+
+Zenburn style from voldmar.ru (c) Vladimir Epifanov <voldmar@voldmar.ru>
+based on dark.css by Ivan Sagalaev
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #3f3f3f;
+  color: #dcdcdc;
+  -webkit-text-size-adjust: none;
+}
+
+.hljs-keyword,
+.hljs-tag,
+.language-css .hljs-class,
+.language-css .hljs-id,
+.language-lisp .hljs-title,
+.language-nginx .hljs-title,
+.hljs-request,
+.hljs-status,
+.clojure .hljs-attribute {
+  color: #e3ceab;
+}
+
+.language-django .hljs-template_tag,
+.language-django .hljs-variable,
+.language-django .hljs-filter .hljs-argument {
+  color: #dcdcdc;
+}
+
+.hljs-number,
+.hljs-date {
+  color: #8cd0d3;
+}
+
+.language-dos .hljs-envvar,
+.language-dos .hljs-stream,
+.hljs-variable,
+.language-apache .hljs-sqbracket {
+  color: #efdcbc;
+}
+
+.language-dos .hljs-flow,
+.language-diff .hljs-change,
+.language-python .exception,
+.language-python .hljs-built_in,
+.hljs-literal,
+.language-tex .hljs-special {
+  color: #efefaf;
+}
+
+.language-diff .hljs-chunk,
+.hljs-subst {
+  color: #8f8f8f;
+}
+
+.language-dos .hljs-keyword,
+.hljs-decorator,
+.hljs-title,
+.hljs-type,
+.language-diff .hljs-header,
+.language-ruby .hljs-class .hljs-parent,
+.language-apache .hljs-tag,
+.language-nginx .hljs-built_in,
+.language-tex .hljs-command,
+.hljs-prompt {
+  color: #efef8f;
+}
+
+.language-dos .hljs-winutils,
+.language-ruby .hljs-symbol,
+.language-ruby .hljs-symbol .hljs-string,
+.language-ruby .hljs-string {
+  color: #dca3a3;
+}
+
+.language-diff .hljs-deletion,
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-built_in,
+.hljs-javadoc,
+.language-smalltalk .hljs-class,
+.language-smalltalk .hljs-localvars,
+.language-smalltalk .hljs-array,
+.language-css .hljs-rules .hljs-value,
+.hljs-attr_selector,
+.hljs-pseudo,
+.language-apache .hljs-cbracket,
+.language-tex .hljs-formula,
+.language-coffeescript .hljs-attribute {
+  color: #cc9393;
+}
+
+.hljs-shebang,
+.language-diff .hljs-addition,
+.hljs-comment,
+.hljs-annotation,
+.hljs-pi,
+.hljs-doctype {
+  color: #7f9f7f;
+}
+
+.language-coffeescript .javascript,
+.language-javascript .xml,
+.language-tex .hljs-formula,
+.language-xml .javascript,
+.language-xml .vbscript,
+.language-xml .css,
+.language-xml .hljs-cdata {
+  opacity: 0.5;
+}
+

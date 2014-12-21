@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+
+
+{# body다음 큰 div 라이브러리 class이름을그대로씀. 바꾸려면 css와 모든 html 파일을 잘 바꿔놓아야함.. #}
+<div class="content-wrap" id="content">
+    <input id="note_name" type="text" placeholder="Title" />
+    <textarea id="note_content" class="ckeditor" name="editor1">
+    </textarea>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            topics = []
+            {% for t in topics %}
+                topics.push('{{ t }}');
+            {% endfor %}
+            $("#topic").tagit({
+                availableTags: topics
+
+            });
+
+        });
+    </script>
+
+
+    <div id="topic_label" >Tag</div>
+    <ul id="topic">
+        <!-- Existing list items will be pre-added to the tags -->
+{#        <li>Tag1</li>#}
+{#        <li>Tag2</li>#}
+    </ul>
+
+    <button class="btn-lg btn-primary" id="bt_add_note" onclick="add_note('{{ csrf_token }}');" > 작성 </button>
+
+
+    <script>
+        CKEDITOR.replace( 'editor1', {
+            extraPlugins: 'codesnippet',
+            codeSnippet_theme: 'zenburn',
+
+
+            // Define the toolbar groups as it is a more accessible solution.
+{#            toolbar: [#}
+{#	            { name: 'undo', groups: [ 'undo' ], items: [ 'Undo', 'Redo' ] },#}
+{#                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },#}
+{#                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },#}
+{#                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },#}
+{#                '/',#}
+{#                { name: 'extraPlugins', items: [ 'codesnippet' ] },#}
+{#                { name: 'insert', items: [ 'Image', 'HorizontalRule', 'SpecialChar' ] },#}
+{#                { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },#}
+{#                { name: 'colors', items: [ 'TextColor', 'BGColor' ] },#}
+{#                { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },#}
+{#                { name: 'others', items: [ '-' ] },#}
+{#                { name: 'about', items: [ 'About' ] }#}
+{#            ],#}
+			// Remove the redundant buttons from toolbar groups defined above.
+
+			removeButtons: 'Cut,Copy,Paste,PasteText,PasteFromWord,Scayt,Image,Flash,Table,SpecialChar,Maximize,Source,About,Subscript,Superscript,RemoveFormat'
+
+        } );
+
+        // Restricts languages to JavaScript and PHP.
+        CKEDITOR.config.codeSnippet_languages = {
+            apache: 'Apache',
+            bash: 'Bash',
+            c: 'C',
+            cpp: 'C++',
+            css: 'CSS',
+            django: 'Django',
+            html: 'HTML',
+            java: 'Java',
+            javascript: 'JavaScript',
+            json: 'JSON',
+            less: 'Less',
+            markdown: 'Markdown',
+{#            nginx: 'Nginx',#}
+            objectivec: 'Objective-C',
+            perl: 'Perl',
+            php: 'PHP',
+            python: 'Python',
+            r: 'R',
+            ruby: 'Ruby',
+            swift: 'Swift',
+            sql: 'SQL',
+            tex: 'Tex',
+            vim: 'Vim Script',
+            xml: 'XML'
+        };
+
+    </script>
+
+</div>
+
+
+{% endblock content %}

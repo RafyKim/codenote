@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    src: url('/static/font/NanumBarunGothic.eot');
+    src: url('/static/font/NanumBarunGothic.eot') format('embedded-opentype'),
+    url('/static/font/NanumBarunGothic.woff') format('woff'),
+    url('/static/font/NanumBarunGothic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumBarunGothicBold';
+    font-style: normal;
+    src: url('/static/font/NanumBarunGothicBold.eot');
+    src: url('/static/font/NanumBarunGothicBold.eot') format('embedded-opentype'),
+    url('/static/font/NanumBarunGothicBold.woff') format('woff'),
+    url('/static/font/NanumBarunGothicBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'JUA';
+    font-style: normal;
+    src: url('/static/font/JUA.eot');
+    src: url('/static/font/JUA.eot') format('embedded-opentype'),
+    url('/static/font/JUA.woff') format('woff'),
+    url('/static/font/JUA.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'JUA';
+    font-style: normal;
+    src: url('/static/font/JUA.eot');
+    src: url('/static/font/JUA.eot') format('embedded-opentype'),
+    url('/static/font/JUA.woff') format('woff'),
+    url('/static/font/JUA.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Regular';
+    font-style: normal;
+    src: url('/static/font/NotoSansKR-Regular.eot');
+    src: url('/static/font/NotoSansKR-Regular.eot') format('embedded-opentype'),
+    url('/static/font/NotoSansKR-Regular.woff') format('woff');
+}
+
+

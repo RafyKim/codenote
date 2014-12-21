@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    {% include 'head.html' %}
+</head>
+
+<body>
+
+{% block modal %}
+    {% include 'login_modal.html' %}
+    {% include 'logout_modal.html' %}
+{% endblock modal %}
+
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock nav %}
+
+{% block content %}
+
+{% endblock content %}
+
+{% block menu %}
+    {% include 'menu.html' %}
+{% endblock menu %}
+
+</body>
+
+</html>
+
+

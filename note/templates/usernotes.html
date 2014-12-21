@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{# body다음 큰 div 라이브러리 class이름을그대로씀. 바꾸려면 css와 모든 html 파일을 잘 바꿔놓아야함.. #}
+<div class="content-wrap" id="content">
+<h3>
+    * 나의 노트들
+</h3>
+
+    {% include page_template %}
+
+    <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+    <script src="{{ STATIC_URL }}endless_pagination/js/endless_on_scroll.js"></script>
+
+    <script>
+    $.endlessPaginate({
+        paginateOnScroll: true,
+        paginateOnScrollMargin: 20
+    });
+    </script>
+
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,264 @@
+<div class="menu-wrap">
+
+    <nav class="menu">
+
+        <ul class="menu-list">
+
+            {% if user.is_authenticated %}
+
+            <li class="menu_home"><a href="/search/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp; 검색</a></li>
+            <li class="menu_home"><a href="/note/add"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp; 새 노트</a></li>
+            <li class="menu_home"><a href="/{{ user.username }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp; 내 노트</a></li>
+            <li class="menu_home"><a href="/{{ user.username }}/collection"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp;&nbsp; 스크랩</a></li>
+
+            <li class="menu_home"><a href="/recommend"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp; 추천 노트</a></li>
+
+            <li class="menu_home"><a data-toggle="modal" href="/accounts/logout/" data-target="#modal_logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp; 로그아웃</a></li>
+{#            <button class="btn btn-default">셋팅</button>#}
+
+            {% else %}
+
+            <li class="menu_home"><a href="/search/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp; 검색</a></li>
+            <button type="button" id="start" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#loginModal" style="position: relative; left: 50px; top: 50px; ">조인하세요</button>
+
+            {% endif %}
+
+        </ul>
+
+{#        {% if user.is_authenticated %}#}
+{##}
+{#        <div class="recent">#}
+{##}
+{#            <div id="recent_title" class="recent_title">#}
+{##}
+{#                <span>최근 소식</span>&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#                <span class="badge">5</span>#}
+{#                <span id="recent_arrow" class="glyphicon glyphicon-chevron-up"></span>#}
+{##}
+{#            </div>#}
+{##}
+{#            <ul class="recent_li">#}
+{#                <li>000님이 <br>000을 000했습니다.</li>#}
+{#                <li>000님이 <br>000에 00 00개를 00했습니다.</li>#}
+{#                <li>000님이 <br>000에 000을 남겼습니다.</li>#}
+{#                <li>누군가가 <br>무엇을 어찌함</li>#}
+{#                <li>누군가가 <br>무엇을 어찌함</li>#}
+{#            </ul>#}
+{##}
+{#        </div>#}
+{#        <div class="close_recent">close</div>#}
+{##}
+{#        {% endif %}#}
+
+
+        {# 로그인 상태태라면 최근소식을 몇개까지 보여줄것인지..'더보기'를 만들어서 페이지로 갈지 or  scroll을 만들어서 해결할지 #}
+        {# 로그인이 아닐때 클릭하면 동작하지 않도록 해야함. 혹은 '로그인후 사용가능하다'는 툴팁이 뜨도록 hover나 focus #}
+        <script>
+            $(document).ready(function(){
+
+                $(".recent_title").click(function(){
+                    if ($("#recent_title").hasClass("recent_title")){
+
+                        $(".recent").animate({height:'100%',bottom:'0'},100);
+                        $(".close_recent").css('z-index','2000');
+                        $(this).removeClass("recent_title").addClass("close_down")
+                        $("#recent_arrow").css('transform','rotate(180deg)');
+                        $(".recent_li").css('color','white');
+
+                    }
+                    else{
+                        $(".close_recent").click();
+                        $(this).removeClass("close_down").addClass("recent_title");
+
+                    }
+                });
+                $(".close_recent").click(function(){
+                    $(this).css('z-index','-100');
+                    $("#recent_title").removeClass("close_down").addClass("recent_title");
+                    $("#recent_arrow").css('transform','rotate(0deg)');
+                    $(".recent").animate({height:'100px'},100);
+                    $(".recent_li").css('color','#606060');
+                });
+            });
+
+        </script>
+
+    </nav>
+
+    <button class="close-button" id="close-button">Close Menu</button>
+
+</div>
+
+    {#  최근소식을 보여줄때 올라가는 animation, 최근소식 보여줄때 display:none 에서 block으로 jquery click event,...  #}
+    {#  최근소식을 보여주는 page가 필요함? '전체보기''더보기'같이 링크를주고 페이지로 이동? #}
+    {#  필요한 return  #}
+
+
+{# menu 닫기 js : 아래 두가지 script 모두 있어야함 #}
+<script>
+        /*!
+         * classie - class helper functions
+         * from bonzo https://github.com/ded/bonzo
+         *
+         * classie.has( elem, 'my-class' ) -> true/false
+         * classie.add( elem, 'my-new-class' )
+         * classie.remove( elem, 'my-unwanted-class' )
+         * classie.toggle( elem, 'my-class' )
+         */
+
+        /*jshint browser: true, strict: true, undef: true */
+        /*global define: false */
+
+    ( function( window ) {
+
+        'use strict';
+
+        // class helper functions from bonzo https://github.com/ded/bonzo
+
+        function classReg( className ) {
+            return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+        }
+
+        // classList support for class management
+        // altho to be fair, the api sucks because it won't accept multiple classes at once
+        var hasClass, addClass, removeClass;
+
+        if ( 'classList' in document.documentElement ) {
+            hasClass = function( elem, c ) {
+                return elem.classList.contains( c );
+            };
+            addClass = function( elem, c ) {
+                elem.classList.add( c );
+            };
+            removeClass = function( elem, c ) {
+                elem.classList.remove( c );
+            };
+        }
+        else {
+            hasClass = function( elem, c ) {
+                return classReg( c ).test( elem.className );
+            };
+            addClass = function( elem, c ) {
+                if ( !hasClass( elem, c ) ) {
+                    elem.className = elem.className + ' ' + c;
+                }
+            };
+            removeClass = function( elem, c ) {
+                elem.className = elem.className.replace( classReg( c ), ' ' );
+            };
+        }
+
+        function toggleClass( elem, c ) {
+            var fn = hasClass( elem, c ) ? removeClass : addClass;
+            fn( elem, c );
+        }
+
+        var classie = {
+            // full names
+            hasClass: hasClass,
+            addClass: addClass,
+            removeClass: removeClass,
+            toggleClass: toggleClass,
+            // short names
+            has: hasClass,
+            add: addClass,
+            remove: removeClass,
+            toggle: toggleClass
+        };
+
+        // transport
+        if ( typeof define === 'function' && define.amd ) {
+            // AMD
+            define( classie );
+        } else {
+            // browser global
+            window.classie = classie;
+        }
+
+    })( window );
+</script>
+
+<script>
+        /**
+        * main.js
+        * http://www.codrops.com
+        *
+        * Licensed under the MIT license.
+        * http://www.opensource.org/licenses/mit-license.php
+        *
+        * Copyright 2014, Codrops
+        * http://www.codrops.com
+         */
+    (function() {
+
+    var bodyEl = document.body,
+            content = document.querySelector( '.content-wrap' ),
+            navi = document.querySelector('.navi'),
+            openbtn = document.getElementById( 'open-button' ),
+            closebtn = document.getElementById( 'close-button' ),
+            isOpen = false;
+
+    function init() {
+        initEvents();
+    }
+
+    function initEvents() {
+        openbtn.addEventListener( 'click', toggleMenu );
+        if( closebtn ) {
+            closebtn.addEventListener( 'click', function(){
+                toggleMenu();
+                if ($("#recent_title").hasClass("recent_title")){
+                    $(".close_recent").stop();
+                }
+                else{
+                    $(".close_recent").click();
+                }
+
+            });
+        }
+
+
+        // close the menu element if the target it´s not the menu element or one of its descendants..
+        content.addEventListener( 'click', function(ev) {
+            var target = ev.target;
+            if( isOpen && target !== openbtn ) {
+                toggleMenu();
+                if ($("#recent_title").hasClass("recent_title")){
+                    $(".close_recent").stop();
+                }
+                else{
+                    $(".close_recent").click();
+                }
+            }
+        } );
+
+        navi.addEventListener( 'click', function(ev) {
+            var target = ev.target;
+            if( isOpen && target !== openbtn ) {
+                toggleMenu();
+                if ($("#recent_title").hasClass("recent_title")){
+                    $(".close_recent").stop();
+                }
+                else{
+                    $(".close_recent").click();
+                }
+            }
+        } );
+
+    }
+
+    function toggleMenu() {
+        if( isOpen ) {
+            classie.remove( bodyEl, 'show-menu' );
+        }
+        else {
+            classie.add( bodyEl, 'show-menu' );
+        }
+        isOpen = !isOpen;
+    }
+
+    init();
+
+    })();
+</script>
+

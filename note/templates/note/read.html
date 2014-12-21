@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{# body다음 큰 div 라이브러리 class이름을그대로씀. 바꾸려면 css와 모든 html 파일을 잘 바꿔놓아야함.. #}
+<div class="content-wrap" id="content">
+    <input type="hidden" id="note_id" value="{{ n.id }}" />
+
+    {% if user.id == n.user_id %}
+        <div id="bt_del" onclick="del_note({{ n.id }}, '{{ csrf_token }}');" ></div>
+        <a href="/note/edit/{{ n.id }}/">
+            <div id="bt_edit" onclick="" ></div>
+        </a>
+    {% else %}
+        <div class="note_user">
+            <a href="/{{ n.user.username }}/">
+                <p>{{ n.user.username }}</p>
+                <img src="{{ n.user_img }}" class="note_img">
+            </a>
+        </div>
+    {% endif %}
+
+    <div>
+        <div id="title">
+    {#    제목    #}
+            <div id="read_note_name">
+                {{ n.name }}
+            </div>
+    {#    날짜    #}
+            <div id="read_note_day">
+                {% load daysince %}
+                ({{ n.modified|dayssince }} 작성됨)
+            </div>
+        </div>
+
+{#    노트    #}
+        <div id="read_note_content">
+            {{ n.content|safe }}
+        </div>
+
+{#    스크랩   #}
+{% if user.is_authenticated %}
+    {% if user.id == n.user_id %}
+    {% else %}
+        <div id="read_note_collection">
+        {% if chk_col == 1 %}
+            <button class="btn-lg btn-info" id="bt_collect" onclick="decollect_note({{ n.id }}, '{{ csrf_token }}');" ><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp; Collect (<span id="cnt_col">{{ n.cnt_col }}</span>)</button>
+        {% else %}
+            <button class="btn-lg btn-default" id="bt_collect" onclick="collect_note({{ n.id }}, '{{ csrf_token }}');" ><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp; Collect (<span id="cnt_col">{{ n.cnt_col }}</span>)</button>
+        {% endif %}
+        </div>
+    {% endif %}
+{% endif %}
+
+{#    정보    #}
+        <div id="read_note_info">
+    {#    스크랩 수    #}
+{#            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"> {{ n.cnt_col }}</span>#}
+    {#    코멘트 수    #}
+{#            <span class="glyphicon glyphicon-comment" aria-hidden="true"> {{ n.cnt_cmt }}</span>#}
+        </div>
+{#    토픽    #}
+        <div id="topic_label">Tag</div>
+        <div id="read_topic_list">
+            {% for t in n.topic.all %}
+                <div class="topic ui-widget-content ui-state-default ui-corner-all">
+                    <a href="/topic/{{ t.name }}">
+                        {{ t.name }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{#    <div>#}
+
+{#    </div>#}
+
+    <h3 style="clear:both; margin: 20px 0px;">Comment (<span id="cnt_cmt">{{ n.cnt_cmt }}</span>)</h3>
+{#      Input Comment   #}
+{% if user.is_authenticated %}
+    <div id="comment0" class="cmt_box">
+        <div class="cmt_left" >
+            <a href="/{{ user.username }}/">
+                <img src="{{ my_img }}" class="cmt_img">
+                <p>{{ user.username }}</p>
+            </a>
+        </div>
+        <div class="cmt_right">
+            <div class="cmt_tip" >
+            </div>
+            <textarea name="cmt_content" id="cmt_content" cols="50" rows="5" placeholder="댓글을 작성해주세요"></textarea>
+            <button class="btn-lg btn-primary bt_cmt" id="bt_cmt" onclick="add_cmt('{{ csrf_token }}');" >작성</button>
+        </div>
+    </div>
+{% endif %}
+{#      Load Comment    #}
+    <div id="cmt_list">
+
+    {% for c in cmts %}
+        <div id="comment{{ c.id }}" class="cmt_box">
+            <div class="cmt_left" >
+                <a href="/{{ c.user.username }}/">
+                    <img src="{{ c.user_img }}" class="cmt_img">
+                    <p>{{ c.user.username }}</p>
+                </a>
+            </div>
+            <div class="cmt_right">
+                <div class="cmt_tip" >
+                </div>
+                <div id="cmt_content{{ c.id }}" class="cmt_content">{{ c.content }}</div>
+            </div>
+        {% if user.id == c.user_id %}
+{#                <a href="/note/edit/{{ n.id }}/">#}
+{#            <div class="bt_edit_cmt" onclick="edit_cmt({{ n.id }}, '{{ csrf_token }}');" ></div>#}
+            <div class="bt_del_cmt" onclick="del_cmt({{ c.id }}, '{{ csrf_token }}');" ></div>
+{#                </a>#}
+        {% endif %}
+
+        </div>
+    {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock content %}

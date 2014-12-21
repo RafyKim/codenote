@@ -1,0 +1,38 @@
+<nav class="navi">
+
+    <button class="menu-button" id="open-button">Open Menu</button>
+
+    <a class="logo" href="/{{ user.username }}">
+        <div class="center_logo"></div>
+    </a>
+
+    {% if user.is_authenticated %}
+    <a href="/note/add/">
+        <div class="new-button" id="note-button"></div>
+    </a>
+    {% else %}
+
+    <a href="/">
+        <div class="new-button" id="note-button"></div>
+    </a>
+    {% endif %}
+
+
+</nav>
+
+{# 네비헤더가 top:60 넘어가면 변신하는 jquery '.shadow'라는 선택자를 수정하면됨. 현재 '.navi'와 동일하게 해놓음 #}
+<script>
+
+    var top = $('.navi').offset().top;
+    $(window).scroll(function (event) {
+        var y = $(this).scrollTop();
+        if (y >= 60) {
+            $('.navi').addClass('shadow').removeClass('.navi');
+{#            $('.navi').addClass('shadow').removeChild('.navi').removeClass('.logo');#}
+        }
+        else {
+            $('.shadow').addClass('.navi').removeClass('.shadow');
+        }
+    });
+
+</script>

@@ -1,0 +1,20 @@
+<div id="comment{{ c.id }}" class="cmt_box">
+    <div class="cmt_left" >
+        <a href="/{{ c.user.username }}/">
+            <img src="{{ c.user_img }}" class="cmt_img">
+            <p>{{ c.user.username }}</p>
+        </a>
+    </div>
+    <div class="cmt_right">
+        <div class="cmt_tip" >
+        </div>
+        <div id="cmt_content{{ c.id }}" class="cmt_content">{{ c.content }}</div>
+    </div>
+
+{#                <a href="/note/edit/{{ n.id }}/">#}
+{#            <div class="bt_edit_cmt" onclick="edit_cmt({{ n.id }}, '{{ csrf_token }}');" ></div>#}
+    <div class="bt_del_cmt" onclick="del_cmt({{ c.id }}, '{{ csrf_token }}');" ></div>
+{#                </a>#}
+
+
+</div>

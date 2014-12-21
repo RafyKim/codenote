@@ -1,0 +1,24 @@
+{%block content%}
+{% load staticfiles %}<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+</head>
+
+<div>
+    <h1>Create a Post</h1>
+
+    <form action="/submit" method="post">
+        {% csrf_token %}
+        <div>
+           {{ form.media }}
+
+           {{ form.name }}
+           {{ form.content }}
+           {{ form.topic }}
+        </div>
+        <input type="submit" value="Post">
+     </form>
+ </div>
+
+ {% endblock %}

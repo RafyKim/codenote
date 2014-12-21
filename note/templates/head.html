@@ -1,0 +1,135 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=0, maximum-scale=1.0" />
+
+<meta property="fb:app_id" content="1536840296554949" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="개발 노하우 찾고, 기록하고, 보관하세요 CodeNote" />
+<meta property="og:url" content="http://codenote.kr/" />
+<meta property="og:description" content="반복되는 개발 경험을 찾고 기록하고 보관하세요. 개발자의, 개발자에 의한, 개발자를 위한 서비스! " />
+<meta property="og:image" content="http://codenote.kr/static/img/codenote.png" />
+
+<title> CodeNote: {% block title %}{% endblock %} </title>
+
+{% load staticfiles %}
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+<link href="/static/tag-it/css/jquery.tagit.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap/bootstrap.min.css" %}"/>
+
+<link rel="stylesheet" href="/static/highlight/css/zenburn_mod.css">
+
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}"/>
+<link rel="stylesheet" href="/static/css/zb.css"/>
+
+{#<link rel="stylesheet" href="/static/medium/css/medium-editor.min.css">#}
+{#<link rel="stylesheet" href="/static/medium/css/medium-editor-insert-plugin.min.css">#}
+{#<link rel="stylesheet" href="/static/medium/css/themes/default.css">#}
+{#<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/>#}
+
+
+
+{% block css %}{% endblock css %}
+
+{% block js %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+{#    <script src="{% static "js/jquery-1.11.1.min.js" %}"></script>#}
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>#}
+    <script src="/static/tag-it/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/static/ckeditor/ckeditor.js"></script>
+
+    <script src="/static/highlight/highlight.pack.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+{#    <script src="{% static "js/jquery.bpopup.min.js" %}"></script>#}
+    <script src="{% static "js/default_script.js" %}"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+    <script>
+        WebFont.load({
+            custom: {
+                families: ['NotoSansKR-Regular'],
+                urls: ['/static/css/font.css']
+            }
+        });
+    </script>
+{#        <script>#}
+{#            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){#}
+{#            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),#}
+{#            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)#}
+{#            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');#}
+{##}
+{#            ga('create', 'UA-53958227-1', 'auto');#}
+{#            ga('require', 'displayfeatures');#}
+{#            ga('require', 'linkid', 'linkid.js');#}
+{#            ga('send', 'pageview');#}
+{##}
+{#        </script>#}
+
+    <!-- UserVoice JavaScript SDK (only needed once on a page) -->
+{#        <script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/sV2XMggGXsXIj5Jk3eRYkQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>#}
+
+    <!-- A tab to launch the Classic Widget -->
+{#        <script>#}
+{#        UserVoice = window.UserVoice || [];#}
+{#        UserVoice.push(['showTab', 'classic_widget', {#}
+{#          mode: 'full',#}
+{#          primary_color: '#97d9d9',#}
+{#          link_color: '#39a5db',#}
+{#          default_mode: 'support',#}
+{#          forum_id: 264419,#}
+{#          tab_label: 'Feedback',#}
+{#          tab_color: '#39a5db',#}
+{#          tab_position: 'middle-right',#}
+{#          tab_inverted: false#}
+{#        }]);#}
+{#        </script>#}
+
+{#                         #}
+{#    <script>(function() {#}
+{#      var _fbq = window._fbq || (window._fbq = []);#}
+{#      if (!_fbq.loaded) {#}
+{#        var fbds = document.createElement('script');#}
+{#        fbds.async = true;#}
+{#        fbds.src = '//connect.facebook.net/en_US/fbds.js';#}
+{#        var s = document.getElementsByTagName('script')[0];#}
+{#        s.parentNode.insertBefore(fbds, s);#}
+{#        _fbq.loaded = true;#}
+{#      }#}
+{#      _fbq.push(['addPixelId', '731484320257002']);#}
+{#    })();#}
+{#    window._fbq = window._fbq || [];#}
+{#    window._fbq.push(['track', 'PixelInitialized', {}]);#}
+{#    </script>#}
+{#    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=731484320257002&amp;ev=PixelInitialized" /></noscript>#}
+
+    <script>
+    $( document ).ready(function() {
+        $('.dropdown-toggle').dropdown();
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > $(window).height()) {
+                $("#scroll_to_top").css('display', 'block');
+            } else {
+                $("#scroll_to_top").css('display', 'none');
+            }
+        });
+    });
+    </script>
+
+{% endblock js %}

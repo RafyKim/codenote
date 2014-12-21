@@ -1,0 +1,55 @@
+{% load endless %}
+
+{% lazy_paginate 5 notes %}
+
+    {% for n in notes %}
+        <div class="note_summary">
+            <div class="title">
+
+                <div class="note_name">
+                    <a href="/note/read/{{ n.id }}">
+                        {{ n.name }}
+                    </a>
+                </div>
+
+                <div class="note_day">
+                    {% load daysince %}
+                    {{ n.modified|dayssince }}
+                </div>
+
+                <div class="note_user">
+                    <a href="/{{ n.user.username }}/">
+                        <p>{{ n.user.username }}</p>
+                        <img src="{{ n.user_img }}" class="note_img">
+                    </a>
+                </div>
+            </div>
+
+            <div class="note_content">
+                {% load nbsp %}
+                <p>
+                    {{ n.content|striptags|nbsp }}
+                </p>
+            </div>
+
+            <div class="topic_list">
+                {% for t in n.topic.all %}
+                    <div class="topic ui-widget-content ui-state-default ui-corner-all">
+                        <a href="/topic/{{ t.name }}">
+                            {{ t.name }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="note_info">
+                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"> {{ n.cnt_col }}</span>
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"> {{ n.cnt_cmt }}</span>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+
+{% show_more %}

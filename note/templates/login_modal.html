@@ -1,0 +1,47 @@
+{# 로그인 모달 #}
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+
+    <div class="login_box">
+
+        <button type="button" class="close"  data-dismiss="modal"><span class="login_close" aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+
+        <div class="login_title">
+            <img src="/static/img/codenote.png" alt="" style="width: 120px;float: left;">
+        </div>
+
+        <div class="slogin_bt">
+
+            {% load socialaccount %}
+            <a href="{% provider_login_url "facebook" method="oauth2" %}">
+                <img src="/static/img/index/fb_login.png" alt="">
+            </a>
+
+            <span style="position: relative;left: 24px;top: -30px;">
+                or
+            </span>
+
+            <a class="g_login" href="/accounts/google/login/?method=oauth2">
+                <img src="/static/img/index/g+_login.png" alt="">
+            </a>
+        </div>
+
+{#        <div  class="lor" ><img src="/static/img/index/or.png" alt=""></div>#}
+
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#to_signup").click(function(){
+            $(".login_title,.login_form,#signup_desc").css({display:'none'},100);
+            $(".signup_title,.signup_form,#login_desc").css('display','block');
+        });
+        $("#to_login").click(function(){
+            $(".signup_title,.signup_form,#login_desc").css('display','none');
+            $(".login_title,.login_form,#signup_desc").css({display:'block'},100);
+        });
+    });
+</script>
