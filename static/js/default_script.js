@@ -3,6 +3,8 @@ function add_note(csrfmiddlewaretoken){
 
     var name = $("#note_name").val();
     var content = CKEDITOR.instances.note_content.getData();
+    var isNotPublic = $("#isNotPublic").is(":checked");
+
     var topic = '';
     $( "#topic input[type='hidden']" ).each(function() {
         topic += $(this).val() + ':$&*:';
@@ -12,7 +14,7 @@ function add_note(csrfmiddlewaretoken){
     $.ajax({
         type: "POST",
         url: "/ajax/note/add/",
-        data: {name: name, content: content, topic: topic, csrfmiddlewaretoken: csrfmiddlewaretoken },
+        data: {name: name, content: content, isNotPublic: isNotPublic, topic: topic, csrfmiddlewaretoken: csrfmiddlewaretoken },
         dataType: "json",
         success: function(msg) {
             window.location.replace("/note/read/"+msg.id);
@@ -46,6 +48,8 @@ function edit_note(note_id, csrfmiddlewaretoken){
 
     var name = $("#note_name").val();
     var content = CKEDITOR.instances.note_content.getData();
+    var isNotPublic = $("#isNotPublic").is(":checked");
+
     var topic = '';
     $( "#topic input[type='hidden']" ).each(function() {
         topic += $(this).val() + ':$&*:';
@@ -54,7 +58,7 @@ function edit_note(note_id, csrfmiddlewaretoken){
     $.ajax({
         type: "POST",
         url: "/ajax/note/edit/",
-        data: {note_id: note_id, name: name, content: content, topic: topic, csrfmiddlewaretoken: csrfmiddlewaretoken },
+        data: {name: name, content: content, isNotPublic: isNotPublic, topic: topic, csrfmiddlewaretoken: csrfmiddlewaretoken },
         dataType: "json",
         success: function(msg) {
             window.location.replace("/note/read/"+note_id);

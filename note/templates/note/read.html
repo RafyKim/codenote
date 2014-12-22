@@ -4,6 +4,8 @@
 
 {# body다음 큰 div 라이브러리 class이름을그대로씀. 바꾸려면 css와 모든 html 파일을 잘 바꿔놓아야함.. #}
 <div class="content-wrap" id="content">
+
+{% if canRead %}
     <input type="hidden" id="note_id" value="{{ n.id }}" />
 
     {% if user.id == n.user_id %}
@@ -121,6 +123,16 @@
     {% endfor %}
 
     </div>
+
+{% else %}
+    읽을 권한이 없습니다.
+    <br/><br/>
+    <div class="btn btn-info">
+        요청하기
+    </div>
+{% endif %}
+
+
 
 </div>
 

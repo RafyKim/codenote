@@ -242,7 +242,6 @@ class SearchView(AjaxListView):
             if n.isPublic == 0:
                 notes.remove(n)
 
-
         return notes
 
     def get_context_data(self, **kwargs):
@@ -301,11 +300,18 @@ class NoteReadView(TemplateView):
         context['cmts'] = cmts
 
         note = Note.objects.get(id=self.kwargs['pk'])
-        note.cnt_col = Collection.objects.filter(note_id=self.kwargs['pk']).count()
-        note.cnt_cmt = cmts.count()
-        note.user_img = user_img(note.user.id)
 
-        context['n'] = note
+        context['canRead'] = True
+        if note.isPublic == 0:
+            if note.user != self.request.user:
+                context['canRead'] = False
+
+        if context['canRead']:
+            note.cnt_col = Collection.objects.filter(note_id=self.kwargs['pk']).count()
+            note.cnt_cmt = cmts.count()
+            note.user_img = user_img(note.user.id)
+
+            context['n'] = note
 
         if self.request.user.id:
             context['my_img'] = user_img(self.request.user.id)
@@ -350,6 +356,10 @@ def add_note(request, **kwargs):
         new_note.content = request.POST.get('content', '')
         if new_note.content == '':
             new_note.content = '내용 없음'
+
+        if request.POST.get('isNotPublic') == 'true':
+            new_note.isPublic = False
+
         new_note.save()
 
         tmp_topic = request.POST.get('topic', '')
@@ -407,6 +417,9 @@ def edit_note(request, **kwargs):
             note.content = request.POST.get('content', '')
             if note.content == '':
                 note.content = '내용 없음'
+
+            if request.POST.get('isNotPublic') == 'true':
+                note.isPublic = False
 
             note.save()
 

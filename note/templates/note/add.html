@@ -35,6 +35,14 @@
 {#        <li>Tag2</li>#}
     </ul>
 
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="isNotPublic"> 비공개
+        </label>
+    </div>
+
+
     <button class="btn-lg btn-primary" id="bt_add_note" onclick="add_note('{{ csrf_token }}');" > 작성 </button>
 
 
@@ -42,24 +50,6 @@
         CKEDITOR.replace( 'editor1', {
             extraPlugins: 'codesnippet',
             codeSnippet_theme: 'zenburn',
-
-
-            // Define the toolbar groups as it is a more accessible solution.
-{#            toolbar: [#}
-{#	            { name: 'undo', groups: [ 'undo' ], items: [ 'Undo', 'Redo' ] },#}
-{#                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },#}
-{#                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },#}
-{#                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },#}
-{#                '/',#}
-{#                { name: 'extraPlugins', items: [ 'codesnippet' ] },#}
-{#                { name: 'insert', items: [ 'Image', 'HorizontalRule', 'SpecialChar' ] },#}
-{#                { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },#}
-{#                { name: 'colors', items: [ 'TextColor', 'BGColor' ] },#}
-{#                { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },#}
-{#                { name: 'others', items: [ '-' ] },#}
-{#                { name: 'about', items: [ 'About' ] }#}
-{#            ],#}
-			// Remove the redundant buttons from toolbar groups defined above.
 
 			removeButtons: 'Cut,Copy,Paste,PasteText,PasteFromWord,Scayt,Image,Flash,Table,SpecialChar,Maximize,Source,About,Subscript,Superscript,RemoveFormat'
 

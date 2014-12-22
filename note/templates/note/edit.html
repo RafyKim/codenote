@@ -29,6 +29,13 @@
 
     </ul>
 
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="isNotPublic"> 비공개
+        </label>
+    </div>
+
     <button class="btn-lg btn-primary" id="bt_add_note" onclick="edit_note({{ n.id }}, '{{ csrf_token }}');" > 작성 </button>
 
 
