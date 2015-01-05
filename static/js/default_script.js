@@ -58,7 +58,7 @@ function edit_note(note_id, csrfmiddlewaretoken){
     $.ajax({
         type: "POST",
         url: "/ajax/note/edit/",
-        data: {name: name, content: content, isNotPublic: isNotPublic, topic: topic, csrfmiddlewaretoken: csrfmiddlewaretoken },
+        data: {note_id: note_id, name: name, content: content, isNotPublic: isNotPublic, topic: topic, csrfmiddlewaretoken: csrfmiddlewaretoken },
         dataType: "json",
         success: function(msg) {
             window.location.replace("/note/read/"+note_id);
