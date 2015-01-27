@@ -21,6 +21,7 @@ from BeautifulSoup import BeautifulSoup
 from django.conf import settings
 from allauth.socialaccount.models import SocialAccount
 from allauth.account.adapter import DefaultAccountAdapter
+from allauth.account.views import RedirectAuthenticatedUserMixin
 
 # 한글 인코딩 ASCII --> UTF-8
 import sys
@@ -61,8 +62,12 @@ class MyAccountAdapter(DefaultAccountAdapter):
         return path.format(username=request.user.username)
 
 
-class IndexView(TemplateView):
+class IndexView(RedirectAuthenticatedUserMixin, TemplateView):
     template_name = 'index.html'
+    redirect_field_name = 'usernotes'
+
+    def get_success_url(self):
+        return "/"+str(self.request.user.username)+"/"
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
