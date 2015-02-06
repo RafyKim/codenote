@@ -6,4 +6,4 @@
 
 # Default
 *.pyc
-#codenote/settings.py
+codenote/settings.py
